@@ -1,52 +1,40 @@
 public class Stack {
-    private Node top;
+    NodeStack top;
+    int jumlahBarang = 0;
+    String nama;
 
-    public Stack() {
+    public Stack(String nama) {
         this.top = null;
+        this.nama = nama;
     }
 
-    public boolean isEmpty() {
-        return top == null;
-    }
-
-    public void Stackpush(String barang) {
-        Node newNode = new Node(null, barang);
-        if (top != null) {
-            newNode.prev = top;
-        }
+    // Menambahkan barang ke stack
+    public void push(String namaBarang, double harga, String kategori) {
+        NodeStack newNode = new NodeStack(namaBarang, harga, kategori);
+        newNode.next = top;
         top = newNode;
-        System.out.println("Barang push: " + barang);
+        jumlahBarang++;
     }
 
-    public String Stackpop() {
-        if (isEmpty()) {
-            System.out.println("Barang kosong.");
-            return null;
+    // Menghapus barang paling atas dari stack (pop)
+    public void pop() {
+        if (top != null) {
+            top = top.next;
+            jumlahBarang--;
+        } else {
+            System.out.println("Stack kosong, tidak ada barang yang dapat dihapus.");
         }
-        String poppedBarang = top.barang;
-        top = top.prev;
-        System.out.println("Barang pop: " + poppedBarang);
-        return poppedBarang;
     }
+    public void displayStack() {
+        NodeStack temp = top;
+        System.out.printf(nama.toUpperCase());
 
-    public String Stackpeek() {
-        if (isEmpty()) {
-            System.out.println("Barang kosong.");
-            return null;
+        while (temp != null) {
+            System.out.println("Nama Barang : " + temp.nama);
+            System.out.println("Harga : " + temp.harga);
+            System.out.println("Kategori : " + temp.kategori);
+            temp = temp.next;
         }
-        return top.barang;
-    }
-
-    public void Stackdisplay() {
-        if (isEmpty()) {
-            System.out.println("Barang kosong.");
-            return;
-        }
-        Node current = top;
-        System.out.println("List Barang");
-        while (current != null) {
-            System.out.println(current.barang);
-            current = current.prev;
-        }
+        System.out.println();
     }
 }
