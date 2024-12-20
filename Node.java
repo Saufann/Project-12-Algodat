@@ -1,10 +1,11 @@
-public class Node {
-    String kurir, barang;
-    Node prev, next;
+public class NodeQueue {
+    String nama;
+    Stack stack;
+    NodeQueue next;
 
-    Node(String kurir, String barang){
-        this.kurir = kurir;
-        this.barang = barang;
-        this.prev = next = null;
+    public NodeQueue(String nama) {
+        this.nama = nama;
+        this.stack = new Stack(nama);
+        this.next = null;
     }
 }
